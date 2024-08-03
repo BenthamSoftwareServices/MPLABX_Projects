@@ -19,7 +19,7 @@ int main(void) {
         // Toggle the LEDs
         NOP();
         PORTA.OUTTGL = (1 << LED_PIN); //the external LED if used
-        _delay_ms(100); // 1000 milliseconds delay
+        _delay_ms(1000); // 1000 milliseconds delay
         NOP();
         PORTC.OUTTGL = (Red_LED); //toggles the bit of PORTC defined by Red_LED i.e. 0x01 which equals PC0, the onboard LED
         _delay_ms(100); // 1000 milliseconds delay
