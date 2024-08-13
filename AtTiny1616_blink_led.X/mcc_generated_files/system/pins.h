@@ -38,43 +38,43 @@
 #include <avr/io.h>
 #include "./port.h"
 
-//get/set IO_PA3 aliases
-#define IO_PA3_SetHigh() do { PORTA_OUTSET = 0x8; } while(0)
-#define IO_PA3_SetLow() do { PORTA_OUTCLR = 0x8; } while(0)
-#define IO_PA3_Toggle() do { PORTA_OUTTGL = 0x8; } while(0)
-#define IO_PA3_GetValue() (VPORTA.IN & (0x1 << 3))
-#define IO_PA3_SetDigitalInput() do { PORTA_DIRCLR = 0x8; } while(0)
-#define IO_PA3_SetDigitalOutput() do { PORTA_DIRSET = 0x8; } while(0)
-#define IO_PA3_SetPullUp() do { PORTA_PIN3CTRL  |= PORT_PULLUPEN_bm; } while(0)
-#define IO_PA3_ResetPullUp() do { PORTA_PIN3CTRL  &= ~PORT_PULLUPEN_bm; } while(0)
-#define IO_PA3_SetInverted() do { PORTA_PIN3CTRL  |= PORT_INVEN_bm; } while(0)
-#define IO_PA3_ResetInverted() do { PORTA_PIN3CTRL  &= ~PORT_INVEN_bm; } while(0)
-#define IO_PA3_DisableInterruptOnChange() do { PORTA.PIN3CTRL = (PORTA.PIN3CTRL & ~PORT_ISC_gm) | 0x0 ; } while(0)
-#define IO_PA3_EnableInterruptForBothEdges() do { PORTA.PIN3CTRL = (PORTA.PIN3CTRL & ~PORT_ISC_gm) | 0x1 ; } while(0)
-#define IO_PA3_EnableInterruptForRisingEdge() do { PORTA.PIN3CTRL = (PORTA.PIN3CTRL & ~PORT_ISC_gm) | 0x2 ; } while(0)
-#define IO_PA3_EnableInterruptForFallingEdge() do { PORTA.PIN3CTRL = (PORTA.PIN3CTRL & ~PORT_ISC_gm) | 0x3 ; } while(0)
-#define IO_PA3_DisableDigitalInputBuffer() do { PORTA.PIN3CTRL = (PORTA.PIN3CTRL & ~PORT_ISC_gm) | 0x4 ; } while(0)
-#define IO_PA3_EnableInterruptForLowLevelSensing() do { PORTA.PIN3CTRL = (PORTA.PIN3CTRL & ~PORT_ISC_gm) | 0x5 ; } while(0)
-#define PA3_SetInterruptHandler IO_PA3_SetInterruptHandler
+//get/set Blu_LED aliases
+#define Blu_LED_SetHigh() do { PORTA_OUTSET = 0x8; } while(0)
+#define Blu_LED_SetLow() do { PORTA_OUTCLR = 0x8; } while(0)
+#define Blu_LED_Toggle() do { PORTA_OUTTGL = 0x8; } while(0)
+#define Blu_LED_GetValue() (VPORTA.IN & (0x1 << 3))
+#define Blu_LED_SetDigitalInput() do { PORTA_DIRCLR = 0x8; } while(0)
+#define Blu_LED_SetDigitalOutput() do { PORTA_DIRSET = 0x8; } while(0)
+#define Blu_LED_SetPullUp() do { PORTA_PIN3CTRL  |= PORT_PULLUPEN_bm; } while(0)
+#define Blu_LED_ResetPullUp() do { PORTA_PIN3CTRL  &= ~PORT_PULLUPEN_bm; } while(0)
+#define Blu_LED_SetInverted() do { PORTA_PIN3CTRL  |= PORT_INVEN_bm; } while(0)
+#define Blu_LED_ResetInverted() do { PORTA_PIN3CTRL  &= ~PORT_INVEN_bm; } while(0)
+#define Blu_LED_DisableInterruptOnChange() do { PORTA.PIN3CTRL = (PORTA.PIN3CTRL & ~PORT_ISC_gm) | 0x0 ; } while(0)
+#define Blu_LED_EnableInterruptForBothEdges() do { PORTA.PIN3CTRL = (PORTA.PIN3CTRL & ~PORT_ISC_gm) | 0x1 ; } while(0)
+#define Blu_LED_EnableInterruptForRisingEdge() do { PORTA.PIN3CTRL = (PORTA.PIN3CTRL & ~PORT_ISC_gm) | 0x2 ; } while(0)
+#define Blu_LED_EnableInterruptForFallingEdge() do { PORTA.PIN3CTRL = (PORTA.PIN3CTRL & ~PORT_ISC_gm) | 0x3 ; } while(0)
+#define Blu_LED_DisableDigitalInputBuffer() do { PORTA.PIN3CTRL = (PORTA.PIN3CTRL & ~PORT_ISC_gm) | 0x4 ; } while(0)
+#define Blu_LED_EnableInterruptForLowLevelSensing() do { PORTA.PIN3CTRL = (PORTA.PIN3CTRL & ~PORT_ISC_gm) | 0x5 ; } while(0)
+#define PA3_SetInterruptHandler Blu_LED_SetInterruptHandler
 
-//get/set LED_PIN aliases
-#define LED_PIN_SetHigh() do { PORTC_OUTSET = 0x1; } while(0)
-#define LED_PIN_SetLow() do { PORTC_OUTCLR = 0x1; } while(0)
-#define LED_PIN_Toggle() do { PORTC_OUTTGL = 0x1; } while(0)
-#define LED_PIN_GetValue() (VPORTC.IN & (0x1 << 0))
-#define LED_PIN_SetDigitalInput() do { PORTC_DIRCLR = 0x1; } while(0)
-#define LED_PIN_SetDigitalOutput() do { PORTC_DIRSET = 0x1; } while(0)
-#define LED_PIN_SetPullUp() do { PORTC_PIN0CTRL  |= PORT_PULLUPEN_bm; } while(0)
-#define LED_PIN_ResetPullUp() do { PORTC_PIN0CTRL  &= ~PORT_PULLUPEN_bm; } while(0)
-#define LED_PIN_SetInverted() do { PORTC_PIN0CTRL  |= PORT_INVEN_bm; } while(0)
-#define LED_PIN_ResetInverted() do { PORTC_PIN0CTRL  &= ~PORT_INVEN_bm; } while(0)
-#define LED_PIN_DisableInterruptOnChange() do { PORTC.PIN0CTRL = (PORTC.PIN0CTRL & ~PORT_ISC_gm) | 0x0 ; } while(0)
-#define LED_PIN_EnableInterruptForBothEdges() do { PORTC.PIN0CTRL = (PORTC.PIN0CTRL & ~PORT_ISC_gm) | 0x1 ; } while(0)
-#define LED_PIN_EnableInterruptForRisingEdge() do { PORTC.PIN0CTRL = (PORTC.PIN0CTRL & ~PORT_ISC_gm) | 0x2 ; } while(0)
-#define LED_PIN_EnableInterruptForFallingEdge() do { PORTC.PIN0CTRL = (PORTC.PIN0CTRL & ~PORT_ISC_gm) | 0x3 ; } while(0)
-#define LED_PIN_DisableDigitalInputBuffer() do { PORTC.PIN0CTRL = (PORTC.PIN0CTRL & ~PORT_ISC_gm) | 0x4 ; } while(0)
-#define LED_PIN_EnableInterruptForLowLevelSensing() do { PORTC.PIN0CTRL = (PORTC.PIN0CTRL & ~PORT_ISC_gm) | 0x5 ; } while(0)
-#define PC0_SetInterruptHandler LED_PIN_SetInterruptHandler
+//get/set Red_LED aliases
+#define Red_LED_SetHigh() do { PORTC_OUTSET = 0x1; } while(0)
+#define Red_LED_SetLow() do { PORTC_OUTCLR = 0x1; } while(0)
+#define Red_LED_Toggle() do { PORTC_OUTTGL = 0x1; } while(0)
+#define Red_LED_GetValue() (VPORTC.IN & (0x1 << 0))
+#define Red_LED_SetDigitalInput() do { PORTC_DIRCLR = 0x1; } while(0)
+#define Red_LED_SetDigitalOutput() do { PORTC_DIRSET = 0x1; } while(0)
+#define Red_LED_SetPullUp() do { PORTC_PIN0CTRL  |= PORT_PULLUPEN_bm; } while(0)
+#define Red_LED_ResetPullUp() do { PORTC_PIN0CTRL  &= ~PORT_PULLUPEN_bm; } while(0)
+#define Red_LED_SetInverted() do { PORTC_PIN0CTRL  |= PORT_INVEN_bm; } while(0)
+#define Red_LED_ResetInverted() do { PORTC_PIN0CTRL  &= ~PORT_INVEN_bm; } while(0)
+#define Red_LED_DisableInterruptOnChange() do { PORTC.PIN0CTRL = (PORTC.PIN0CTRL & ~PORT_ISC_gm) | 0x0 ; } while(0)
+#define Red_LED_EnableInterruptForBothEdges() do { PORTC.PIN0CTRL = (PORTC.PIN0CTRL & ~PORT_ISC_gm) | 0x1 ; } while(0)
+#define Red_LED_EnableInterruptForRisingEdge() do { PORTC.PIN0CTRL = (PORTC.PIN0CTRL & ~PORT_ISC_gm) | 0x2 ; } while(0)
+#define Red_LED_EnableInterruptForFallingEdge() do { PORTC.PIN0CTRL = (PORTC.PIN0CTRL & ~PORT_ISC_gm) | 0x3 ; } while(0)
+#define Red_LED_DisableDigitalInputBuffer() do { PORTC.PIN0CTRL = (PORTC.PIN0CTRL & ~PORT_ISC_gm) | 0x4 ; } while(0)
+#define Red_LED_EnableInterruptForLowLevelSensing() do { PORTC.PIN0CTRL = (PORTC.PIN0CTRL & ~PORT_ISC_gm) | 0x5 ; } while(0)
+#define PC0_SetInterruptHandler Red_LED_SetInterruptHandler
 
 /**
  * @ingroup  pinsdriver
@@ -86,43 +86,43 @@ void PIN_MANAGER_Initialize();
 
 /**
  * @ingroup  pinsdriver
- * @brief Default Interrupt Handler for IO_PA3 pin. 
- *        This is a predefined interrupt handler to be used together with the IO_PA3_SetInterruptHandler() method.
- *        This handler is called every time the IO_PA3 ISR is executed. 
+ * @brief Default Interrupt Handler for Blu_LED pin. 
+ *        This is a predefined interrupt handler to be used together with the Blu_LED_SetInterruptHandler() method.
+ *        This handler is called every time the Blu_LED ISR is executed. 
  * @pre PIN_MANAGER_Initialize() has been called at least once
  * @param none
  * @return none
  */
-void IO_PA3_DefaultInterruptHandler(void);
+void Blu_LED_DefaultInterruptHandler(void);
 
 /**
  * @ingroup  pinsdriver
- * @brief Interrupt Handler Setter for IO_PA3 pin input-sense-config functionality.
- *        Allows selecting an interrupt handler for IO_PA3 at application runtime
+ * @brief Interrupt Handler Setter for Blu_LED pin input-sense-config functionality.
+ *        Allows selecting an interrupt handler for Blu_LED at application runtime
  * @pre PIN_MANAGER_Initialize() has been called at least once
  * @param InterruptHandler function pointer.
  * @return none
  */
-void IO_PA3_SetInterruptHandler(void (* interruptHandler)(void)) ; 
+void Blu_LED_SetInterruptHandler(void (* interruptHandler)(void)) ; 
 
 /**
  * @ingroup  pinsdriver
- * @brief Default Interrupt Handler for LED_PIN pin. 
- *        This is a predefined interrupt handler to be used together with the LED_PIN_SetInterruptHandler() method.
- *        This handler is called every time the LED_PIN ISR is executed. 
+ * @brief Default Interrupt Handler for Red_LED pin. 
+ *        This is a predefined interrupt handler to be used together with the Red_LED_SetInterruptHandler() method.
+ *        This handler is called every time the Red_LED ISR is executed. 
  * @pre PIN_MANAGER_Initialize() has been called at least once
  * @param none
  * @return none
  */
-void LED_PIN_DefaultInterruptHandler(void);
+void Red_LED_DefaultInterruptHandler(void);
 
 /**
  * @ingroup  pinsdriver
- * @brief Interrupt Handler Setter for LED_PIN pin input-sense-config functionality.
- *        Allows selecting an interrupt handler for LED_PIN at application runtime
+ * @brief Interrupt Handler Setter for Red_LED pin input-sense-config functionality.
+ *        Allows selecting an interrupt handler for Red_LED at application runtime
  * @pre PIN_MANAGER_Initialize() has been called at least once
  * @param InterruptHandler function pointer.
  * @return none
  */
-void LED_PIN_SetInterruptHandler(void (* interruptHandler)(void)) ; 
+void Red_LED_SetInterruptHandler(void (* interruptHandler)(void)) ; 
 #endif /* PINS_H_INCLUDED */

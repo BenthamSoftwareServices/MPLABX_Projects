@@ -34,8 +34,8 @@
 
 #include "../pins.h"
 
-static void (*IO_PA3_InterruptHandler)(void);
-static void (*LED_PIN_InterruptHandler)(void);
+static void (*Blu_LED_InterruptHandler)(void);
+static void (*Red_LED_InterruptHandler)(void);
 
 void PIN_MANAGER_Initialize()
 {
@@ -83,42 +83,42 @@ void PIN_MANAGER_Initialize()
     PORTMUX.CTRLD = 0x0;
 
   // register default ISC callback functions at runtime; use these methods to register a custom function
-    IO_PA3_SetInterruptHandler(IO_PA3_DefaultInterruptHandler);
-    LED_PIN_SetInterruptHandler(LED_PIN_DefaultInterruptHandler);
+    Blu_LED_SetInterruptHandler(Blu_LED_DefaultInterruptHandler);
+    Red_LED_SetInterruptHandler(Red_LED_DefaultInterruptHandler);
 }
 
 /**
-  Allows selecting an interrupt handler for IO_PA3 at application runtime
+  Allows selecting an interrupt handler for Blu_LED at application runtime
 */
-void IO_PA3_SetInterruptHandler(void (* interruptHandler)(void)) 
+void Blu_LED_SetInterruptHandler(void (* interruptHandler)(void)) 
 {
-    IO_PA3_InterruptHandler = interruptHandler;
+    Blu_LED_InterruptHandler = interruptHandler;
 }
 
-void IO_PA3_DefaultInterruptHandler(void)
+void Blu_LED_DefaultInterruptHandler(void)
 {
-    // add your IO_PA3 interrupt custom code
-    // or set custom function using IO_PA3_SetInterruptHandler()
+    // add your Blu_LED interrupt custom code
+    // or set custom function using Blu_LED_SetInterruptHandler()
 }
 /**
-  Allows selecting an interrupt handler for LED_PIN at application runtime
+  Allows selecting an interrupt handler for Red_LED at application runtime
 */
-void LED_PIN_SetInterruptHandler(void (* interruptHandler)(void)) 
+void Red_LED_SetInterruptHandler(void (* interruptHandler)(void)) 
 {
-    LED_PIN_InterruptHandler = interruptHandler;
+    Red_LED_InterruptHandler = interruptHandler;
 }
 
-void LED_PIN_DefaultInterruptHandler(void)
+void Red_LED_DefaultInterruptHandler(void)
 {
-    // add your LED_PIN interrupt custom code
-    // or set custom function using LED_PIN_SetInterruptHandler()
+    // add your Red_LED interrupt custom code
+    // or set custom function using Red_LED_SetInterruptHandler()
 }
 ISR(PORTA_PORT_vect)
 { 
     // Call the interrupt handler for the callback registered at runtime
     if(VPORTA.INTFLAGS & PORT_INT3_bm)
     {
-       IO_PA3_InterruptHandler(); 
+       Blu_LED_InterruptHandler(); 
     }
     /* Clear interrupt flags */
     VPORTA.INTFLAGS = 0xff;
@@ -135,7 +135,7 @@ ISR(PORTC_PORT_vect)
     // Call the interrupt handler for the callback registered at runtime
     if(VPORTC.INTFLAGS & PORT_INT0_bm)
     {
-       LED_PIN_InterruptHandler(); 
+       Red_LED_InterruptHandler(); 
     }
     /* Clear interrupt flags */
     VPORTC.INTFLAGS = 0xff;
