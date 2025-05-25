@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?> 
+<project>                                  
+  <executable name="dist/default/production/AtTiny1616_blink_led.X.production.elf">                 
+    <memory name="program">              
+      <units>bytes</units>                 
+      <length>16384</length>                 
+      <used>4767</used>                     
+      <free>11617</free>                     
+    </memory>                              
+    <memory name="data">                 
+      <units>bytes</units>                 
+      <length>2048</length>                 
+      <used>40</used>                     
+      <free>2008</free>                     
+    </memory>                              
+  </executable>                            
+</project>                                 
